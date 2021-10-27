@@ -6,7 +6,13 @@ const schema = yup.object().shape({
     .string()
     .email("Please enter a valid email such as you@mail.com.")
     .required("Please enter you email address."),
-  password: yup.string().min(4).max(8).required(),
+  password: yup
+    .string()
+    .required()
+    .matches(
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})/,
+      "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and One Special Case Character"
+    ),
   birthday: yup.date().required(`Please enter your child's birthday/due date`),
   receiveOffers: yup.boolean().required()
 });
